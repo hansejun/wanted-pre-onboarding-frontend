@@ -4,15 +4,16 @@ import { createTodo } from "../apis/todoApi";
 import useInput from "../hooks/useInput";
 
 const TodoForm = ({ setTodos }) => {
-  const { value, onChange, reset } = useInput({ text: "" });
+  const { value, onChange, reset } = useInput({ addText: "" });
 
   // todo 추가
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
-      const { text } = value;
-      if (!text || text?.length === 0) return;
-      const { data } = await createTodo({ todo: text });
+      console.log("hello");
+      const { addText } = value;
+      if (!addText || addText?.length === 0) return;
+      const { data } = await createTodo({ todo: addText });
       setTodos((prev) => [...prev, data]);
       reset();
     },
@@ -23,8 +24,8 @@ const TodoForm = ({ setTodos }) => {
       <Input
         type="text"
         data-testid="new-todo-input"
-        name="text"
-        value={value.text}
+        name="addText"
+        value={value.addText}
         onChange={onChange}
       />
       <Button data-testid="new-todo-add-button">추가</Button>
@@ -34,7 +35,7 @@ const TodoForm = ({ setTodos }) => {
 
 export default TodoForm;
 
-const Form = styled.div`
+const Form = styled.form`
   display: flex;
   width: 300px;
 `;

@@ -10,7 +10,7 @@ const Todo = () => {
   useEffect(() => {
     (async () => {
       const { data } = await getTodos();
-      setTodos(data);
+      if (data) setTodos(data);
     })();
   }, []);
 
